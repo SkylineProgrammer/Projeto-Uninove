@@ -1,0 +1,288 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #e8d5ff 0%, #f0e6ff 50%, #f5f0ff 100%);
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    width: 100%;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    text-align: center;
+}
+
+/* Seção do Título */
+.secao-titulo {
+    margin-bottom: 60px;
+}
+
+.titulo-principal {
+    font-size: 42px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+
+.subtitulo {
+    font-size: 18px;
+    color: #6b7280;
+}
+
+/* Seção de Dificuldades */
+.secao-dificuldades {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 60px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cartao-dificuldade {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cartao-dificuldade:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.15);
+}
+
+/* Cores específicas para cada cartão */
+.cartao-facil {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid #bbf7d0;
+}
+
+.cartao-medio {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 2px solid #fde68a;
+}
+
+.cartao-dificil {
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+    border: 2px solid #f9a8d4;
+}
+
+/* Ícones de Dificuldade */
+.icone-dificuldade {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.icone-facil {
+    background: #10b981;
+    color: white;
+}
+
+.icone-medio {
+    background: #f59e0b;
+    color: white;
+}
+
+.icone-dificil {
+    background: #ec4899;
+    color: white;
+}
+
+/* Textos dos Cartões */
+.titulo-dificuldade {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.pontos-dificuldade {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.descricao-dificuldade {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+/* Botões de Selecionar */
+.botao-selecionar {
+    width: 100%;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botao-selecionar:hover {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -6px rgba(139, 92, 246, 0.4);
+}
+
+/* Seção de Voltar */
+.secao-voltar {
+    margin-bottom: 40px;
+}
+
+.botao-voltar {
+    background: transparent;
+    color: #8b5cf6;
+    border: 2px solid #8b5cf6;
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botao-voltar:hover {
+    background: #8b5cf6;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Botão de Ajuda */
+.botao-ajuda {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    background: #1f2937;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.botao-ajuda:hover {
+    background: #374151;
+    transform: scale(1.1);
+}
+
+/* Design Responsivo */
+@media (max-width: 1024px) {
+    .secao-dificuldades {
+        gap: 24px;
+        max-width: 800px;
+    }
+    
+    .cartao-dificuldade {
+        padding: 32px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .titulo-principal {
+        font-size: 32px;
+    }
+    
+    .subtitulo {
+        font-size: 16px;
+    }
+    
+    .secao-dificuldades {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .cartao-dificuldade {
+        padding: 28px 20px;
+    }
+    
+    .icone-dificuldade {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .titulo-dificuldade {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .titulo-principal {
+        font-size: 28px;
+    }
+    
+    .subtitulo {
+        font-size: 14px;
+    }
+    
+    .secao-titulo {
+        margin-bottom: 40px;
+    }
+    
+    .cartao-dificuldade {
+        padding: 24px 16px;
+    }
+    
+    .icone-dificuldade {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+    
+    .titulo-dificuldade {
+        font-size: 20px;
+    }
+    
+    .pontos-dificuldade {
+        font-size: 15px;
+    }
+    
+    .descricao-dificuldade {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+}

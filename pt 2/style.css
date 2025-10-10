@@ -1,0 +1,322 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #e8d5ff 0%, #f0e6ff 50%, #f5f0ff 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* Cabeçalho */
+.caberalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.info-usuario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-usuario {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.detalhes-usuario {
+    display: flex;
+    flex-direction: column;
+}
+
+.nome-usuario {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 2px;
+}
+
+.email-usuario {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+a{ 
+    text-decoration: none;
+}
+
+.botao-sair {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgb(252, 252, 252);
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botao-sair:hover {
+    background: #ee5215;
+    border-color: #d1d5db;
+}
+
+.icone-sair {
+    font-size: 16px;
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    text-align: center;
+}
+
+.secao-marca {
+    margin-bottom: 60px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.icone-logo {
+    font-size: 48px;
+    color: #8b5cf6;
+}
+
+.titulo-marca {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.subtitulo-marca {
+    font-size: 18px;
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+.mensagem-boas-vindas {
+    font-size: 18px;
+    color: #8b5cf6;
+    font-weight: 500;
+}
+
+/* Seção de Categorias */
+.secao-categorias {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cartao-categoria {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cartao-categoria:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.icone-cartao {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.icone-programacao {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+}
+
+.icone-banco-dados {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+}
+
+.icone-sistemas {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+}
+
+.titulo-cartao {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.descricao-cartao {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* Seção de Iniciar Quiz */
+.secao-iniciar-quiz {
+    margin-bottom: 40px;
+}
+
+.botao-iniciar-quiz {
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+}
+
+.botao-iniciar-quiz:hover {
+    background: linear-gradient(135deg, #7c3aed, #9333ea);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(139, 92, 246, 0.5);
+}
+
+.info-quiz {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Botão de Ajuda */
+.botao-ajuda {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    background: #1f2937;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.botao-ajuda:hover {
+    background: #374151;
+    transform: scale(1.1);
+}
+
+/* Design Responsivo */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .secao-categorias {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    .cartao-categoria {
+        padding: 28px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .cabecalho {
+        margin-bottom: 40px;
+    }
+    
+    .titulo-marca {
+        font-size: 36px;
+    }
+    
+    .subtitulo-marca {
+        font-size: 16px;
+    }
+    
+    .secao-categorias {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+    
+    .cartao-categoria {
+        padding: 24px 20px;
+    }
+    
+    .info-usuario {
+        gap: 8px;
+    }
+    
+    .avatar-usuario {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    .botao-sair {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .icone-logo {
+        font-size: 36px;
+    }
+    
+    .titulo-marca {
+        font-size: 28px;
+    }
+    
+    .cabecalho {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+}
