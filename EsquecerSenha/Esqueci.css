@@ -12,6 +12,7 @@
     font-family: sans-serif;
 }
 
+/* layout principal e a cor do fundo */
 body {
      background: linear-gradient(135deg, #e8d5ff 0%, #f0e6ff 50%, #f5f0ff 100%);
     min-height: 100vh;
@@ -28,6 +29,7 @@ body {
 }
 
 
+/* 2. Login  */
 .secao-login {
     width: 38%; 
     background-color: #f8ecfa;
@@ -86,7 +88,7 @@ body {
     width: 150px; 
 }
 
-
+/* seção de texto */
 .secao-visual {
     width: 62%; 
     display: flex;
@@ -103,7 +105,7 @@ body {
     line-height: 1; 
 }
 
-
+/* responsividade */
 @media (max-width: 1024px) {
     .secao-login {
         width: 45%;
