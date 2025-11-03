@@ -1,0 +1,327 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitBot - Assistente Premium | Bit a Bit</title>
+    
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+    
+   
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+       
+        :root {
+            --roxo-principal: #9370DB; 
+            --roxo-claro: #E6E6FA;    
+            --cinza-fundo: #f8f8f8;
+            --cinza-borda: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cinza-fundo);
+        }
+
+        .bitbot-full-page-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+       
+        .bitbot-page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--cinza-borda);
+            background-color: var(--roxo-principal);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bitbot-title-main {
+            font-size: 1.5em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 1; }
+
+        .status-indicator {
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+        }
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #38c172; /* Verde */
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        /* MENSAGENS */
+        .bitbot-messages-full {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--cinza-fundo);
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 18px;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background-color: var(--roxo-claro);
+            margin-left: auto;
+            border-bottom-right-radius: 4px; 
+        }
+
+        .bot {
+            background-color: white;
+            margin-right: auto;
+            border: 1px solid var(--cinza-borda);
+            border-bottom-left-radius: 4px; 
+        }
+
+        .bot-status, .bot-error {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bot-error { color: #cc0000; }
+
+        .loader-icon {
+            margin-right: 5px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        
+        .bitbot-input-area-full {
+            display: flex;
+            padding: 15px 20px;
+            border-top: 1px solid var(--cinza-borda);
+            background-color: white;
+        }
+
+        .bitbot-input-full {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            font-size: 1em;
+            margin-right: 10px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .bitbot-input-full:focus {
+            border-color: var(--roxo-principal);
+        }
+
+        .bitbot-send-btn-full {
+            background-color: var(--roxo-principal);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, opacity 0.2s;
+        }
+        .bitbot-send-btn-full:hover {
+            background-color: #7957d5; 
+        }
+        .bitbot-send-btn-full:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="bitbot-full-page-container">
+        <header class="bitbot-page-header">
+            <a href="{% url 'principal' %}" class="back-link">
+                
+                <i class='bx bx-arrow-back' style="font-size: 18px;"></i>
+                Voltar
+            </a>
+            
+            
+            <h1 class="bitbot-title-main">
+                <i class='bx bxs-bot' style="margin-right: 8px;"></i> 
+                BitBot Premium
+            </h1>
+            <div class="status-indicator">
+                <span class="online-dot"></span> Online
+            </div>
+        </header>
+
+        <div id="chat-body" class="bitbot-messages-full">
+            
+        </div>
+
+        <div class="bitbot-input-area-full">
+            <input type="text" id="chat-input" placeholder="Pergunte sobre T.I. ou a plataforma..." class="bitbot-input-full">
+            <button id="chat-send-btn" class="bitbot-send-btn-full">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Mapeamento de elementos HTML
+        const chatBody = document.getElementById('chat-body');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send-btn');
+        
+        const API_URL = "{% url 'api_chatbot_responder' %}";
+        
+        
+        function displayMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            
+            let formattedText = text.replace(/\n/g, '<br>');
+            
+            if (sender === 'bot') {
+                {# BOXICON: bxs-bot (Ícone do Bot na Mensagem)  #}
+                formattedText = `<div style="display: flex; align-items: flex-start;">
+                    <i class='bx bxs-bot' style="font-size: 20px; color: var(--roxo-principal); margin-right: 8px;"></i>
+                    <span>${formattedText}</span>
+                </div>`;
+            } else if (sender === 'user') {
+                 {#  BOXICON: bxs-user-circle (Ícone do Usuário na Mensagem)  #}
+                formattedText = `<div style="display: flex; align-items: flex-start; justify-content: flex-end;">
+                    <span>${formattedText}</span>
+                    <i class='bx bxs-user-circle' style="font-size: 20px; color: #666; margin-left: 8px;"></i>
+                </div>`;
+            }
+            
+            messageDiv.innerHTML = formattedText; 
+            
+            chatBody.appendChild(messageDiv);
+            
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const pergunta = chatInput.value.trim();
+            
+            if (pergunta === '') return;
+
+            displayMessage(pergunta, 'user');
+            chatInput.value = '';
+
+            chatInput.disabled = true;
+            chatSendBtn.disabled = true;
+            
+            {#  BOXICON: bx-loader-alt (Ícone de Carregamento Giratório)  #}
+            const loadingMessage = document.createElement('div');
+            loadingMessage.classList.add('bot-status');
+            loadingMessage.innerHTML = "<i class='bx bx-loader-alt loader-icon'></i> BitBot está pensando...";
+            chatBody.appendChild(loadingMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken') 
+                    },
+                    body: JSON.stringify({ pergunta: pergunta })
+                });
+
+                while (chatBody.lastChild && chatBody.lastChild.classList.contains('bot-status')) {
+                    chatBody.removeChild(chatBody.lastChild);
+                }
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayMessage(data.resposta, 'bot');
+                } else {
+                    displayMessage(`⚠️ Erro: ${data.error || 'Ocorreu um erro na API.'}`, 'bot-error');
+                }
+
+            } catch (error) {
+                while (chatBody.lastChild && chatBody.lastChild.classList.contains('bot-status')) {
+                    chatBody.removeChild(chatBody.lastChild);
+                }
+                console.error('Erro na requisição:', error);
+                displayMessage('🛑 Erro de conexão com o servidor. Tente novamente.', 'bot-error');
+            } finally {
+                chatInput.disabled = false;
+                chatSendBtn.disabled = false;
+                chatInput.focus();
+            }
+        }
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        
+        chatSendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); 
+                sendMessage();
+            }
+        });
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+             displayMessage('Bem-vindo(a)! Sou o BitBot, seu assistente premium de T.I. Como posso te ajudar hoje?', 'bot');
+             chatInput.focus();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7f9; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.bitbot-full-page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 850px; 
+    height: 90vh; 
+    min-height: 600px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+}
+
+
+.bitbot-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #3f51b5; 
+    color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bitbot-title-main {
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.status-indicator {
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.online-dot {
+    height: 10px;
+    width: 10px;
+    background-color: #4CAF50; 
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    box-shadow: 0 0 5px #4CAF50;
+}
+
+.bitbot-messages-full {
+    flex-grow: 1; 
+    padding: 20px;
+    overflow-y: auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.bitbot-messages-full::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bitbot-messages-full::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+}
+
+
+.message {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word; 
+    line-height: 1.5;
+    font-size: 0.95em;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+
+.user {
+    background-color: #3f51b5; 
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 5px; 
+}
+
+
+.bot {
+    background-color: #e6e9f1; 
+    color: #333;
+    margin-right: auto;
+    border-bottom-left-radius: 5px; 
+}
+
+
+.bot-status {
+    color: #999;
+    font-style: italic;
+    align-self: flex-start; 
+    padding: 5px 15px;
+}
+
+
+.bot-error {
+    background-color: #fce4e4; 
+    color: #c0392b; 
+    font-weight: 600;
+    margin-right: auto;
+    border: 1px solid #c0392b;
+}
+
+
+.bitbot-input-area-full {
+    display: flex;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    gap: 10px;
+}
+
+.bitbot-input-full {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.bitbot-input-full:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.3);
+    outline: none;
+}
+
+.bitbot-send-btn-full {
+    padding: 12px 25px;
+    background-color: #3f51b5; 
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.bitbot-send-btn-full:hover {
+    background-color: #303f9f;
+}
+
+.bitbot-send-btn-full:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 768px) {
+    .bitbot-full-page-container {
+        height: 100vh; 
+        width: 100%;
+        max-width: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .bitbot-messages-full {
+        padding: 15px;
+    }
+
+    .bitbot-page-header {
+        padding: 12px 15px;
+    }
+
+    .bitbot-input-area-full {
+        padding: 10px 15px;
+    }
+
+    .bitbot-input-full {
+        padding: 10px 15px;
+    }
+
+    .bitbot-send-btn-full {
+        padding: 10px 20px;
+    }
+}

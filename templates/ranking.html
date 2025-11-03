@@ -1,0 +1,139 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Global - Bit a Bit</title>
+    <link rel="stylesheet" href="{% static 'css/ranking.css' %}"> <style>
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a2e; 
+            color: #e4e4e4;
+        }
+        .ranking-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #2a2a4a; 
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h1 {
+            color: #ffcc00; 
+            text-shadow: 0 0 5px #ffcc00;
+            margin-bottom: 30px;
+        }
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #3e3e6f;
+            border-radius: 8px;
+            overflow: hidden; 
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #4a4a7f;
+        }
+        .ranking-table th {
+            background-color: #4a4a7f;
+            color: #ffcc00;
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+        .ranking-table tr:nth-child(1) td { background-color: #ffcc0044; color: #ffcc00; font-weight: bold; }
+        .ranking-table tr:nth-child(2) td { background-color: #c0c0c044; color: #c0c0c0; }
+        .ranking-table tr:nth-child(3) td { background-color: #cd7f3244; color: #cd7f32; }
+        .botao-voltar {
+            padding: 10px 20px; 
+            background-color: #5a5a8a; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .botao-voltar:hover {
+            background-color: #6a6ab0;
+        }
+    </style>
+</head>
+<body>
+    <div class="ranking-container">
+        <h1>🏆 Ranking Global Bit a Bit 🏆</h1>
+
+        <div id="ranking-container">
+            <p style="text-align: center; color: #ffcc00;">Carregando Ranking...</p>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="{% url 'principal' %}" class="botao-voltar">Voltar à Página Principal</a>
+        </div>
+    </div>
+    
+    <script>
+        function carregarRanking() {
+            const rankingContainer = document.getElementById('ranking-container');
+            rankingContainer.innerHTML = '<p style="text-align: center; color: #ffcc00;">Carregando Ranking...</p>';
+
+            fetch('{% url "api_ranking_top10" %}') 
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha ao carregar ranking. Status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    rankingContainer.innerHTML = '<p style="text-align: center; color: #ffcc00; padding: 20px;">Nenhum jogador no ranking ainda!</p>';
+                    return;
+                }
+
+                let html = `
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Posição</th>
+                            <th scope="col">Usuário</th>
+                            <th scope="col">Pontuação Máxima</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                data.forEach((item, index) => {
+                    let medal = '';
+                    if (index === 0) medal = '🥇';
+                    else if (index === 1) medal = '🥈';
+                    else if (index === 2) medal = '🥉';
+
+                    html += `
+                        <tr>
+                            <td style="font-weight: bold; color: white;">${medal} ${index + 1}</td>
+                            <td style="color: #e4e4e4;">${item.username}</td>
+                            <td style="font-weight: bold; color: #ffcc00;">${item.pontuacao}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                    </tbody>
+                </table>
+                `;
+                rankingContainer.innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Erro ao carregar o ranking:", error);
+                rankingContainer.innerHTML = '<p style="color: red; text-align: center; padding: 20px;">Erro ao buscar dados do ranking.</p>';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarRanking);
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Senha - Bit a Bit</title>
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+</head>
+<body>
+    <div class="perfil-container" style="max-width: 450px;">
+        <div class="perfil-header" style="height: 60px;"></div>
+        <div class="perfil-conteudo" style="padding-top: 20px;">
+            <h1 style="font-size: 24px; color: var(--roxo-principal); margin-bottom: 25px; text-align: center;">
+                Alterar Senha
+            </h1>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if form.errors %}
+                    <div style="color: red; margin-bottom: 15px; border: 1px solid red; padding: 10px; border-radius: 5px;">
+                        Por favor, corrija os erros abaixo.
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div style="margin-bottom: 15px;">
+                        <label for="{{ field.id_for_label }}" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: var(--texto-claro);">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red; font-size: 14px;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                
+                <button type="submit" class="botao-acao botao-voltar" style="width: 100%; margin-top: 20px;">
+                    Mudar Senha
+                </button>
+                
+                <a href="{% url 'perfil_page' %}" class="botao-acao" style="width: 100%; margin-top: 10px; background-color: #ccc; color: #333;">
+                    Cancelar
+                </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+//padrao do proprio django para mudanças de senhas 

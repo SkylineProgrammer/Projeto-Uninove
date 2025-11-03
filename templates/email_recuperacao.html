@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recuperação de Senha Bit a Bit</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd;">
+        <h2>Recuperação de Senha - Bit a Bit</h2>
+        <p>Olá {{ user.username }},</p>
+        <p>Você solicitou a recuperação de senha. Clique no link abaixo para criar uma nova senha:</p>
+        
+        <p style="text-align: center; margin: 30px 0;">
+            <a href="{{ reset_link }}" 
+               style="background-color: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                Criar Nova Senha
+            </a>
+        </p>
+
+        <p>Se você não solicitou esta alteração, pode ignorar este e-mail.</p>
+        <p>Obrigado,<br>Equipe Bit a Bit</p>
+        <p style="font-size: 0.8em; color: #999;">Link para acesso: {{ reset_link }}</p>
+    </div>
+</body>
+</html>

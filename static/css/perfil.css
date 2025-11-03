@@ -1,0 +1,128 @@
+:root {
+    --roxo-principal: #8b5cf6;
+    --roxo-claro: #a855f7;
+    --fundo-principal: #f5f0ff;
+    --texto-claro: #6b7280;
+    --texto-escuro: #1f2937;
+    --vermelho-sair: #ee5215;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #e8d5ff 0%, var(--fundo-principal) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--texto-escuro);
+}
+
+.perfil-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; 
+    overflow: hidden;
+}
+
+
+.perfil-header {
+    background: linear-gradient(135deg, var(--roxo-principal), var(--roxo-claro));
+    height: 100px;
+    position: relative;
+}
+
+
+.perfil-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 55px; 
+    left: 20px;
+    border: 5px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-avatar span {
+    font-size: 45px;
+    color: var(--roxo-principal);
+}
+
+
+.perfil-conteudo {
+    padding: 20px;
+    padding-top: 60px; 
+}
+
+.perfil-card {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.perfil-card h2 {
+    font-size: 14px;
+    color: var(--texto-claro);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.perfil-card p {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--texto-escuro);
+    line-height: 1.2;
+}
+
+.tag-usuario {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--roxo-principal);
+}
+
+
+.perfil-acoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.botao-acao {
+    flex-grow: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.botao-voltar {
+    background-color: var(--roxo-principal);
+    color: white;
+}
+
+.botao-voltar:hover {
+    background-color: #7c3aed;
+}
+
+.botao-sair-perfil {
+    background-color: var(--texto-claro);
+    color: white;
+}
+
+.botao-sair-perfil:hover {
+    background-color: var(--vermelho-sair);
+}

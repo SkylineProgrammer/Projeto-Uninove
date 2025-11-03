@@ -1,0 +1,269 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Fácil</title>
+    <link rel="stylesheet" href="{% static 'css/perguntas.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="cabecalho-quiz">
+            <div class="info-quiz">
+                <span class="nivel-dificuldade" id="facil">Fácil</span>
+                <p class="contador-pergunta">Pergunta 1 de 5</p>
+            </div>
+            <div class="cronometro">
+                <span class="icone-tempo">⏱</span>
+                <span class="tempo-restante">30s</span>
+            </div>
+        </header>
+
+        <div class="barra-progresso">
+            <div class="progresso-preenchido"></div>
+        </div>
+
+        <main class="conteudo-principal">
+            <div class="secao-pergunta">
+                <h1 class="texto-pergunta">Carregando pergunta...</h1>
+            </div>
+
+            <section class="secao-alternativas">
+                </section>
+        </main>
+
+        <footer class="rodape-quiz">
+            <div class="info-sair">
+                <a href="{% url 'gamemode_page' %}"><button class="botao-sair-quiz">Sair do Quiz</button></a>
+            </div>
+            <div class="info-pontuacao">
+                <p class="label-pontuacao">Pontuação atual</p>
+                <p class="pontos-atuais">0 pontos</p>
+            </div>
+        </footer>
+
+        <a href="{% url 'ajuda_page' %}" class="botao-ajuda">?</a>
+    </div>
+
+<script>
+    // VARIAVEIS DO QUIZ 
+    let perguntas = [];
+    let indicePerguntaAtual = 0;
+    let pontuacaoAtual = 0;
+    let tempoRestante = 30;
+    let cronometroInterval;
+    let quizAtivo = true;
+    const totalPerguntas = 5;
+
+    // Elementos DOM
+    const textoPergunta = document.querySelector('.texto-pergunta');
+    const contadorPergunta = document.querySelector('.contador-pergunta');
+    const tempoDisplay = document.querySelector('.tempo-restante');
+    const pontosDisplay = document.querySelector('.pontos-atuais');
+    const progressoPreenchido = document.querySelector('.progresso-preenchido');
+    const secaoAlternativas = document.querySelector('.secao-alternativas');
+    const nivelDificuldadeElement = document.querySelector('.nivel-dificuldade');
+    // Pega a primeira letra (F) do ID 'facil'
+    const dificuldadeChar = nivelDificuldadeElement.id.charAt(0).toUpperCase(); 
+
+    
+    // FUNÇÕES DE UTILIDADE (CSRF)
+    
+
+    // FUNÇAO PARA OBTER O TOKEN CSRF (OBRIGATORIAMENTE POR CAUSA DO POST)
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    
+    //FUNÇÕES DE CRONÔMETRO
+    
+
+    function iniciarCronometro() {
+        clearInterval(cronometroInterval);
+        tempoDisplay.textContent = `${tempoRestante}s`;
+
+        cronometroInterval = setInterval(() => {
+            tempoRestante--;
+            tempoDisplay.textContent = `${tempoRestante}s`;
+
+            if (tempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                alert("Tempo esgotado! A resposta foi ignorada.");
+                proximaPergunta();
+            }
+        }, 1000);
+    }
+
+    
+    //FUNÇÕES DE RENDERIZAÇÃO
+    
+
+    function getLetra(index) {
+        return String.fromCharCode(65 + index);
+    }
+
+    function renderizarPergunta(pergunta) {
+        
+        textoPergunta.textContent = pergunta.texto;
+
+        // Atualiza o contador e a barra de progresso
+        const numAtual = indicePerguntaAtual + 1;
+        contadorPergunta.textContent = `Pergunta ${numAtual} de ${totalPerguntas}`;
+        progressoPreenchido.style.width = `${(numAtual / totalPerguntas) * 100}%`;
+
+        //  tempo limite e inicia o cronômetro
+        tempoRestante = pergunta.tempo_limite || 30; 
+        iniciarCronometro();
+
+        
+        secaoAlternativas.innerHTML = ''; 
+        pergunta.respostas.forEach((resposta, index) => {
+            const letra = getLetra(index);
+
+            const alternativa = document.createElement('div');
+            alternativa.classList.add('alternativa');
+            alternativa.dataset.respostaId = resposta.id; 
+            alternativa.addEventListener('click', () => {
+                if (quizAtivo) {
+                    selecionarAlternativa(alternativa);
+                }
+            });
+
+            alternativa.innerHTML = `
+                <span class="letra-alternativa">${letra}</span>
+                <span class="texto-alternativa">${resposta.texto}</span>
+            `;
+            secaoAlternativas.appendChild(alternativa);
+        });
+    }
+
+    
+    //LÓGICA DE INTERAÇÃO E VALIDAÇÃO
+    
+    async function selecionarAlternativa(elementoAlternativa) {
+        if (!quizAtivo) return; 
+
+        quizAtivo = false;
+        clearInterval(cronometroInterval); 
+
+        const respostaId = elementoAlternativa.dataset.respostaId;
+
+        try {
+            
+            const response = await fetch('/api/quiz/verificar/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    
+                    'X-CSRFToken': getCookie('csrftoken') 
+                },
+                body: JSON.stringify({ resposta_id: respostaId })
+            });
+
+            const data = await response.json();
+
+            if (data.correta) {
+                elementoAlternativa.classList.add('correta');
+                pontuacaoAtual += data.pontos;
+            } else {
+                elementoAlternativa.classList.add('errada');
+            }
+
+            pontosDisplay.textContent = `${pontuacaoAtual} pontos`;
+
+        } catch (error) {
+            
+            console.error("Erro ao verificar resposta:", error);
+            textoPergunta.textContent = "Erro de conexão com o servidor. Verifique a API.";
+            elementoAlternativa.classList.add('erro-servidor');
+        }
+
+        setTimeout(proximaPergunta, 1500);
+    }
+
+    function proximaPergunta() {
+    indicePerguntaAtual++;
+
+    if (indicePerguntaAtual < perguntas.length) {
+        renderizarPergunta(perguntas[indicePerguntaAtual]);
+        quizAtivo = true; 
+    } else {
+        
+        alert(`Quiz Concluído! Sua pontuação final foi: ${pontuacaoAtual} pontos.`);
+
+        
+        const dataToSave = {
+            pontuacao: pontuacaoAtual,
+            dificuldade: dificuldadeChar 
+        };
+        
+        
+        
+        fetch('/api/quiz/salvar_pontuacao/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken') 
+            },
+            body: JSON.stringify(dataToSave)
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('Pontuação final registrada com sucesso!');
+            } else {
+                console.error('Falha ao registrar pontuação:', response.status, response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Erro de rede ao salvar pontuação:', error);
+        })
+        .finally(() => {
+            
+            window.location.href = "{% url 'principal' %}"; 
+        });
+    }
+}
+
+    
+
+    async function iniciarQuiz() {
+        try {
+            
+            const response = await fetch(`/api/quiz/${dificuldadeChar}/`); 
+            const data = await response.json();
+
+            if (response.ok) {
+                if (data.length === 0) {
+                    textoPergunta.textContent = "Nenhuma pergunta encontrada. Use a API de Geração IA para criar questões primeiro!";
+                    return;
+                }
+                perguntas = data;
+                renderizarPergunta(perguntas[indicePerguntaAtual]);
+            } else {
+                textoPergunta.textContent = `Erro ao carregar perguntas: ${data.detail || response.statusText}`;
+            }
+        } catch (error) {
+            textoPergunta.textContent = "Erro de conexão com o servidor. Verifique o console para detalhes.";
+            console.error("Erro fatal ao carregar quiz:", error);
+        }
+    }
+
+    
+    iniciarQuiz();
+
+</script>
+</body>
+</html>

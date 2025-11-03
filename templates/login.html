@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bit a Bit</title>
+ 
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <main class="container-principal">
+        
+        <section class="secao-login">
+            <div class="conteudo-login">
+                
+                <form method="POST" action="{% url 'auth_login_page' %}">
+                    {% csrf_token %} 
+                    
+                    {% if form.errors %}
+                        <p style="color: red; font-size: 0.9em; margin-bottom: 0;">
+                            Usuário ou senha inválidos. Tente novamente.
+                        </p>
+                    {% endif %}
+                
+                    <div class="grupo-input">
+                        <label for="id_username">Nome de Usuário</label>
+                        <input type="text" id="id_username" name="username" placeholder="Digite seu usuário:"> 
+                    </div>
+                    
+                    <div class="grupo-input"> 
+                        <label for="id_password">Senha</label>
+                        <div class="input-com-icone">
+                            <input type="password" id="id_password" name="password" placeholder="Digite sua senha:">
+                            <span id="togglePasswordLogin" class="toggle-password">👁️</span> 
+                        </div>
+                    </div>
+
+                    <button type="submit" class="botao-entrar">Entrar</button>
+                    
+                    <a href="{% url 'registro' %}" class="botao-registrar">Registrar</a>
+                    <a href="{% url 'password_reset' %}" class="botao-esqueci">Esqueci a Senha</a>
+                    
+                </form>
+                
+            </div>
+        </section>
+        
+        <section class="secao-visual">
+            <h1 class="texto-logo">Bit <br> a <br> Bit</h1>
+        </section>
+
+    </main>
+    <script src="{% static 'css/login.js' %}"></script>
+</body>
+</html>

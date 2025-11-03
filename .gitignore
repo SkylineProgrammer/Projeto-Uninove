@@ -1,0 +1,25 @@
+# Pastas de Cache e Compilação do Python
+__pycache__/
+*.pyc
+*.pyd
+*.so
+
+# Arquivos de Ambiente
+.env
+
+# Pastas de Ambiente Virtual
+venv/
+.venv/
+
+# Banco de Dados Local
+db.sqlite3
+
+# Arquivos de Mídia (Uploads do Usuário)
+media/
+
+# Pastas de Arquivos Estaticos
+staticfiles/
+staticfiles_collected/
+
+# Arquivos de idle
+# .vscode/

@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda - Bit a Bit</title>
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}"> 
+</head>
+<body>
+    <div class="perfil-container" style="max-width: 600px; padding: 20px;">
+        <h1 style="color: #8b5cf6; margin-bottom: 20px; text-align: center;">Central de Ajuda (?)</h1>
+        
+        <div class="perfil-card">
+            <h2>Bem-vindo ao Bit a Bit!</h2>
+            <p style="margin-bottom: 15px;">Este é um aplicativo para testar seus conhecimentos em Tecnologia da Informação. Clique em "Começar Quiz" e escolha sua categoria e nível de dificuldade.</p>
+        </div>
+
+        <div class="perfil-card">
+            <h2>Sobre a Pontuação</h2>
+            <p style="margin-bottom: 15px;">Sua pontuação é baseada em:</p>
+            <ul>
+                <li>O nível de dificuldade escolhido (Fácil, Médio, Difícil).</li>
+                <li>A velocidade de sua resposta.</li>
+            </ul>
+        </div>
+        
+        <div class="perfil-card">
+            <h2>Suporte</h2>
+            <p>Se você encontrar algum erro ou tiver sugestões, entre em contato:</p>
+            <p style="font-weight: bold; color: #1f2937;">Email: suportebitabit1@gmail.com</p>
+        </div>
+
+        <a href="{% url 'principal' %}" class="botao-acao botao-voltar" style="display: block; width: 100%; margin-top: 20px;">
+            Voltar ao Menu Principal
+        </a>
+    </div>
+</body>
+</html>

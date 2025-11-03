@@ -1,0 +1,205 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bit a Bit - Teste seus conhecimentos em TI</title>
+    
+    <link rel="stylesheet" href="{% static 'css/principal.css' %}"> 
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        .avatar-usuario {
+            width: 50px; 
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px; 
+            background-color: #f0f0f0;
+            border: 3px solid transparent; 
+            overflow: hidden; 
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        
+        .avatar-usuario img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: 50%;
+        }
+
+        
+        .premium-border {
+            border-color: #007bff; 
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.6); 
+        }
+
+        /* Borda Básica */
+        .basic-border {
+            border-color: #ccc; 
+        }
+        
+        
+        .icone-avatar i.bx {
+            font-size: 32px; 
+            color: #666;
+        }
+        .botao-sair i.bx {
+            font-size: 1.2em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="caberalho">
+            <a href="{% url 'perfil_page' %}" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <div class="info-usuario">
+                    
+                    
+                    <div class="avatar-usuario {% if is_premium %}premium-border{% else %}basic-border{% endif %}">
+                        
+                        
+                        {% if perfil and perfil.foto_perfil and perfil.foto_perfil.name and perfil.foto_perfil.name != 'fotos_perfil/default.png' %}
+                            <img src="{{ perfil.foto_perfil.url }}" alt="Foto de Perfil">
+                        {% else %}
+                            
+                            <i class='bx bxs-user-circle'></i>
+                        {% endif %}
+                        
+                    </div>
+                    
+
+                    <div class="detalhes-usuario">
+                        <h3 class="nome-usuario">{{ request.user.username|default:"Usuário" }}</h3>
+                        <p class="email-usuario">{{ request.user.email|default:"email / usuario" }}</p>
+                    </div>
+                </div>
+            </a>
+            <form method="post" action="{% url 'logout_page' %}" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="botao-sair">
+                    
+                    <i class='bx bx-log-out'></i>
+                    Sair
+                </button>
+            </form>
+        </header> 
+        
+        <main class="conteudo-principal">
+            <div class="secao-marca">
+                <div class="logo">
+                    
+                    <i class="icone-logo bx bxs-brain"></i>
+                    <h1 class="titulo-marca">Bit a Bit</h1>
+                </div>
+                <p class="subtitulo-marca">Teste seus conhecimentos em Tecnologia da Informação</p>
+                <p class="mensagem-boas-vindas">Bem-vindo de volta, {{ request.user.username|default:"Usuário" }}! 👋</p>
+            </div>
+
+            <section class="secao-categorias">
+                <div class="cartao-categoria">
+                    
+                    <div class="icone-cartao icone-programacao"><i class='bx bxs-terminal'></i></div>
+                    <h3 class="titulo-cartao">Programação</h3>
+                    <p class="descricao-cartao">Testes focados em linguagens, lógica e algoritmos.</p>
+                </div>
+                <div class="cartao-categoria">
+                    
+                    <div class="icone-cartao icone-banco-dados"><i class='bx bxs-data'></i></div>
+                    <h3 class="titulo-cartao">Banco de Dados</h3>
+                    <p class="descricao-cartao">Questões sobre SQL, modelagem e administração.</p>
+                </div>
+                <div class="cartao-categoria">
+                    
+                    <div class="icone-cartao icone-sistemas"><i class='bx bxs-cloud-upload'></i></div>
+                    <h3 class="titulo-cartao">Redes e Sistemas</h3>
+                    <p class="descricao-cartao">Conhecimentos sobre infraestrutura, SO e segurança.</p>
+                </div>
+            </section>
+
+            <div class="secao-acoes-principais">
+                <div class="secao-iniciar-quiz" style="flex-grow: 1; margin-right: 15px;">
+                    <a href="{% url 'gamemode_page' %}">
+                        <button class="botao-iniciar-quiz">Começar Quiz</button>
+                    </a>
+                    <p class="info-quiz">5 perguntas • 3 níveis de dificuldade</p>
+                </div>
+
+                <div class="secao-ranking" style="flex-grow: 1;">
+                    <a href="{% url 'ranking' %}">
+                        <button class="botao-ranking">
+                            
+                            <i class='bx bxs-trophy icone-ranking'></i> <span>Ranking Global</span>
+                        </button>
+                    </a>
+                    <p class="info-quiz">Veja as pontuações máximas dos jogadores</p>
+                </div>
+            </div>
+            
+            <section class="secao-premium" id="secao-premium-bitbot">
+                <a href="#" id="bitbot-premium-btn">
+                    <button class="botao-bitbot-premium">
+                        
+                        <i class='bx bxs-bot'></i> <span>Acessar BitBot Premium</span>
+                    </button>
+                </a>
+                <p class="info-premium">Recurso exclusivo para assinantes</p>
+            </section>
+            
+            
+            <a href="{% url 'ajuda_page' %}" class="botao-ajuda">
+                <i class='bx bx-help-circle'></i>
+            </a>
+
+            <div id="premium-modal" class="modal-premium-venda" style="display: none;">
+                <div class="modal-content-venda">
+                    <span class="modal-close-btn" onclick="fecharModal()">&times;</span>
+                    
+                    <div class="modal-icon-venda"><i class='bx bxs-bot'></i></div>
+                    <h2 class="modal-title-venda">BitBot Premium: Desbloqueie a I.A.</h2>
+                    <p class="modal-description-venda">Recurso exclusivo para assinantes. Obtenha acesso ilimitado ao seu assistente de T.I. e domine o conhecimento.</p>
+                    
+                    <div class="premium-benefits-venda">
+                        <p>Chat Ilimitado</p>
+                        <p>Tutoriais Avançados</p>
+                        <p>Suporte Prioritário</p>
+                    </div>
+
+                    <a href="{% url 'assinatura_page' %}" class="modal-action-btn-venda">
+                        ASSINAR AGORA
+                    </a>
+                    
+                    <p class="modal-subtext">Apenas <strong>R$ 9,90/mês</strong>. Cancele quando quiser.</p>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('bitbot-premium-btn').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            
+            
+            const isPremium = {{ is_premium|yesno:"true,false" }}; 
+            
+            if (isPremium) {
+                window.location.href = "{% url 'chatbot_page' %}";
+            } else {
+                document.getElementById('premium-modal').style.display = 'flex';
+            }
+        });
+
+        function fecharModal() {
+            document.getElementById('premium-modal').style.display = 'none';
+        }
+    </script>
+    
+</body>
+</html>

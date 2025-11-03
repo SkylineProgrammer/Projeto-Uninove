@@ -1,0 +1,365 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Bit a Bit</title>
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style> 
+        
+        :root {
+            --cor-primaria: #0092fbff; 
+            --cor-secundaria: #FF69B4;
+            --texto-claro: #666; 
+            --fundo-card: #ffffff;
+        }
+
+       
+        .perfil-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f7f7f7;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .perfil-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .tag-usuario {
+            font-size: 2em;
+            color: #333;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .perfil-card {
+            background-color: var(--fundo-card);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        .perfil-card h2 {
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            color: #333; 
+            font-size: 1.3em;
+        }
+        .perfil-acoes {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .botao-acao {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .botao-acao:first-child { 
+            background-color: var(--cor-primaria); /* Azul #0092fbff */
+            color: white !important;
+        }
+        
+        .botao-acao:last-child {
+            background-color: #ccc !important;
+            color: #333 !important;
+        }
+
+       
+        .botao-acao i {
+             margin-right: 5px;
+             font-size: 1.2em;
+        }
+        .botao-acao:first-child i {
+            color: #FFD700; 
+        }
+        .botao-acao:last-child i {
+            color: #666;
+        }
+        
+        
+        .perfil-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px; 
+            background-color: #f0f0f0;
+            border: 5px solid transparent; 
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative; 
+            cursor: pointer; 
+        }
+
+        .perfil-avatar img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            border-radius: 50%;
+        }
+        
+        
+        .premium-border {
+            border-color: var(--cor-secundaria); /* #FF69B4 (Rosa/Magenta) */
+            box-shadow: 0 0 12px rgba(255, 105, 180, 0.8); 
+        }
+
+        .basic-border {
+            border-color: #ccc; 
+        }
+
+        /* Botão de Editar Foto */
+        .botao-upload-avatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--cor-primaria); /* #0092fbff */
+            color: white;
+            border: 3px solid #f7f7f7; 
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px; 
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            padding: 0;
+        }
+        
+       
+        .badge-premium-box {
+            background-color: var(--cor-primaria); /* #0092fbff */
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .badge-premium-icon {
+            color: #ffd700; 
+            margin-right: 5px;
+            line-height: 1; 
+        }
+
+        
+        .historico-table {
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+        .historico-table th, .historico-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .historico-table th {
+            background-color: #f8f8f8; 
+            color: var(--texto-claro); 
+        }
+        .historico-table tr:last-child td {
+            border-bottom: none; 
+        }
+        .diff-F { color: green; font-weight: bold; }
+        .diff-M { color: orange; font-weight: bold; }
+        .diff-D { color: red; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+    <div class="perfil-container">
+        <div class="perfil-header">
+            
+            <div class="perfil-avatar {% if is_premium %}premium-border{% else %}basic-border{% endif %}">
+                
+                {# Lógica para exibir a foto de perfil #}
+                {% if perfil and perfil.foto_perfil.name and perfil.foto_perfil.name != 'fotos_perfil/default.png' %}
+                    <img src="{{ perfil.foto_perfil.url }}" alt="Foto de Perfil">
+                {% else %}
+                    
+                    <i class='bx bxs-user-circle' style="font-size: 90px; color: #666;"></i>
+                {% endif %}
+                
+                {# Form e input (hidden) #}
+                <form method="post" action="{% url 'upload_foto_perfil' %}" enctype="multipart/form-data" id="form-upload-foto">
+                    {% csrf_token %}
+                    {{ form_foto.foto_perfil }} 
+                </form>
+                
+                
+                <button id="botao-upload" type="button" class="botao-upload-avatar">
+                    <i class='bx bx-camera'></i>
+                </button>
+                
+            </div> 
+            
+            {# Bloco badge prmium #}
+            {% if is_premium %}
+                <div class="badge-premium-box">
+                    <span class="badge-premium-icon"><i class='bx bxs-star'></i></span> 
+                    <span class="badge-premium-text">BitBot Premium</span>
+                    
+                </div>
+            {% endif %}
+            
+        </div> 
+
+        <div class="perfil-conteudo">
+            <h1 class="tag-usuario">{{ request.user.username }}</h1>
+
+            <div class="perfil-card">
+                <h2>Informações de Conta</h2>
+                
+                {# info de premiun/basico#}
+                <div style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+                    <p style="font-size: 16px; color: var(--texto-claro);">Status da Assinatura:</p>
+                    <p style="font-weight: bold; color: {% if is_premium %}#007bff{% else %}#666{% endif %};">
+                        {% if is_premium %}Assinante Premium{% else %}Usuário Básico{% endif %}
+                    </p>
+                </div>
+
+                <div style="margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">
+                    <p style="font-size: 16px; color: var(--texto-claro);">Nome de Usuário:</p>
+                    <p style="font-weight: bold;">{{ request.user.username }}</p>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <p style="font-size: 16px; color: var(--texto-claro);">Endereço de E-mail:</p>
+                    <p style="font-weight: bold;">{{ request.user.email|default:"Não definido" }}</p>
+                </div>
+            </div> 
+            
+            <div class="perfil-card" style="margin-top: 20px;">
+                <h2>Seu Histórico de Jogos</h2>
+                <div id="historico-container">
+                    <p style="text-align: center; color: #666;">Carregando histórico...</p>
+                </div>
+            </div>
+
+            <div class="perfil-acoes">
+                
+                <a href="{% url 'password_change' %}" class="botao-acao" style="flex-grow: 1;">
+                    <i class='bx bx-key'></i> Alterar Senha
+                </a>
+                
+                
+                <a href="{% url 'principal' %}" class="botao-acao" style="flex-grow: 1;">
+                    <i class='bx bx-arrow-back'></i> Voltar
+                </a>
+            </div> 
+        </div> 
+    </div> 
+
+    <script>
+        //  Garantindo que a URL seja resolvida pelo Django.
+        const historicoUrl = "{% url 'api_historico_pontuacao' %}"; 
+
+        function formatarData(dataString) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return new Date(dataString).toLocaleDateString('pt-BR', options);
+        }
+
+        function carregarHistorico() {
+            const historicoContainer = document.getElementById('historico-container');
+            
+            fetch(historicoUrl) 
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha ao carregar histórico. Status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if ((data.detail && data.detail.includes('Nenhum registro')) || data.length === 0) {
+                    historicoContainer.innerHTML = '<p style="text-align: center; color: #007bff; padding: 10px;">Você ainda não jogou nenhum quiz!</p>';
+                    return;
+                }
+
+                let html = `
+                <table class="historico-table">
+                    <thead>
+                        <tr>
+                            <th>Pontos</th>
+                            <th>Dificuldade</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                data.forEach((item) => {
+                    const dificuldadeChar = item.dificuldade;
+                    const dificuldadeNome = dificuldadeChar === 'F' ? 'Fácil' : 
+                                             dificuldadeChar === 'M' ? 'Média' : 'Difícil';
+                    
+                    html += `
+                        <tr>
+                            <td style="font-weight: bold;">${item.pontos_totais}</td>
+                            <td class="diff-${dificuldadeChar}">${dificuldadeNome}</td>
+                            <td>${formatarData(item.data_conclusao)}</td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                    </tbody>
+                </table>
+                `;
+                historicoContainer.innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Erro ao carregar o histórico:", error);
+                historicoContainer.innerHTML = '<p style="color: red; text-align: center; padding: 10px;">Erro ao buscar dados do histórico.</p>';
+            });
+        }
+
+        // codigo JS para upload de foto de perfil
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarHistorico();
+
+            const botaoUpload = document.getElementById('botao-upload');
+            const inputFoto = document.getElementById('id_foto_perfil');
+            const formUpload = document.getElementById('form-upload-foto');
+
+            if (botaoUpload && inputFoto && formUpload) {
+                
+                botaoUpload.addEventListener('click', function() {
+                    inputFoto.click(); 
+                });
+
+                
+                inputFoto.addEventListener('change', function() {
+                    formUpload.submit();
+                });
+            }
+        });
+        
+    </script>
+</body>
+</html>

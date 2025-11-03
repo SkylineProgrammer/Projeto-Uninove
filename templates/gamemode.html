@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha a Dificuldade - Bit a Bit</title>
+    <link rel="stylesheet" href="{% static 'css/gamemode.css' %}">
+</head>
+<body>
+    <div class="container">
+        <main class="conteudo-principal">
+            <div class="secao-titulo">
+                <h1 class="titulo-principal">Escolha a Dificuldade</h1>
+                <p class="subtitulo">Selecione o nível que melhor se adapta ao seu conhecimento</p>
+            </div>
+
+            <section class="secao-dificuldades">
+                <div class="cartao-dificuldade cartao-facil">
+                    <div class="icone-dificuldade icone-facil">
+                        <span>⭐</span>
+                    </div>
+                    <h3 class="titulo-dificuldade">Fácil</h3>
+                    <p class="pontos-dificuldade">10 pontos por pergunta</p>
+                    <p class="descricao-dificuldade">Conceitos básicos de T.I.</p>
+                    
+                    <a href="{% url 'perguntas_facil' %}" class="botao-selecionar">Selecionar</a>
+                </div>
+
+                <div class="cartao-dificuldade cartao-medio">
+                    <div class="icone-dificuldade icone-medio">
+                        <span>⚡</span>
+                    </div>
+                    <h3 class="titulo-dificuldade">Médio</h3>
+                    <p class="pontos-dificuldade">20 pontos por pergunta</p>
+                    <p class="descricao-dificuldade">Conhecimentos intermediários</p>
+                    
+                    <a href="{% url 'perguntas_media' %}" class="botao-selecionar">Selecionar</a>
+                </div>
+
+                <div class="cartao-dificuldade cartao-dificil">
+                    <div class="icone-dificuldade icone-dificil">
+                        <span>👑</span>
+                    </div>
+                    <h3 class="titulo-dificuldade">Difícil</h3>
+                    <p class="pontos-dificuldade">30 pontos por pergunta</p>
+                    <p class="descricao-dificuldade">Conceitos avançados</p>
+                    
+                    <a href="{% url 'perguntas_dificil' %}" class="botao-selecionar">Selecionar</a>
+                </div>
+            </section>
+
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="{% url 'principal' %}" class="botao-voltar">
+                    Voltar  
+                </a>
+            </div>
+            
+        </main>
+
+        <a href="{% url 'ajuda_page' %}" class="botao-ajuda">?</a>
+    </div>
+</body>
+</html>
