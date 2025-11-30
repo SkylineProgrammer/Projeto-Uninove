@@ -90,8 +90,7 @@ def pagina_principal(request):
 def pagina_perfil(request):
     """
     Renderiza a página de perfil do usuário, passando status e formulário.
-    🛑 CORRIGIDO: Removida a duplicação e garantido o RENDER 🛑
-    """
+  """
     perfil = request.user.perfil if hasattr(request.user, 'perfil') else None
     is_premium = perfil.is_assinante if perfil else False
     

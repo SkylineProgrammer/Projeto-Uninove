@@ -10,10 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 # IMPORTS
-import os 
+import os
 from pathlib import Path
 from datetime import timedelta 
-import dj_database_url # IMPORTAÇAO PARA BANCO DE DADOS(DB)
+#import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,29 +22,49 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(rnb*pi^t^jfms1k)nj8j$mb=+4p1_oo-f!y@lqy$4d4yyyp6b' # chave do django
+# SECURITY WARNING: keep the secret key used in production secret! tirei por segurança (apenas no render)
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default_secret_key_para_dev') # para o render
 
 
-# Correção .1
 
+# CONFIGURAÇÃO PARA DOIS AMBIENTES (LOCAL E DE PRODUÇÃO) 
 
-DEBUG = True # para idle local
-# permite acesso de localhost 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# Verifica se a variável de ambiente RENDER existe (ou DATABASE_URL)
+IS_RENDER_DEPLOYMENT = os.environ.get('RENDER') == 'true' 
+
+if IS_RENDER_DEPLOYMENT:
+    # Configuraçoes do render
+    DEBUG = False
+    #nome completo do dominio Render
+    ALLOWED_HOSTS = ['bit-a-bit-quiz-1.onrender.com', '.onrender.com'] 
     
-# CHAVE DO GEMINI ATIVA:
-GEMINI_API_KEY = 'AIzaSyAWTerGbvZiWdqLdVdN8HwgZXxsXOZ-h9A' 
     
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:5500", 
-]
+    # CHAVE GIMINI
+    GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+    
+    CORS_ALLOWED_ORIGINS = [
+        "https://iza72.pythonanywhere.com",
+    ]
+else:
+    # Configurações de IDLE (Local e Code)
+    DEBUG = True
+    # Permite acesso de localhost e outras portas locais
+    ALLOWED_HOSTS = ['iza72.pythonanywhere.com', '127.0.0.1', 'localhost']
+    
+    #chave  do Gemini, ativa em desenvolvimento para QUIZ e BOT
+    GEMINI_API_KEY = 'AIzaSyAWTerGbvZiWdqLdVdN8HwgZXxsXOZ-h9A' 
+    
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:5500", 
+    ]
+    
     
 # Application definition
 
 INSTALLED_APPS = [
+    'usuarios',#mudando para cima
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,14 +74,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-
-    # Apps criados no momento
-    'usuarios',
-    'quiz',
+    'quiz', #instalado
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -103,9 +121,13 @@ STATICFILES_DIRS = [
 # Local onde os arquivos serão coletados pelo collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
 # Gerenciamento de arquivos de midia (upload de fotos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#novo pacote de arquivos estaticos para o render
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Autenticaçao e Segurança
@@ -132,30 +154,38 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# CONFIGURAÇÃO DE EMAIL e REDIRECIONAMENTO
-
-DEFAULT_FROM_EMAIL = 'suporte@bitabit.com' #MUDAR
+# CONFIGURAÇÃO DE EMAIL e REDIRECIONAMENTO 
+DEFAULT_FROM_EMAIL = 'suportebitabit1@gmail.com'
 LOGIN_REDIRECT_URL = '/principal/'
 LOGOUT_REDIRECT_URL = '/login/'
 
 
-# DATABASE E DEPLOYMENT
+# CSRF_TRUSTED_ORIGINS de segurança
+CSRF_TRUSTED_ORIGINS = [
+    'https://bit-a-bit-quiz.onrender.com',
+    'https://*.onrender.com'
+]
 
 
-# SUBINDO SITE PARA O SERVIDOR/ IMPORTAÇÕES DE DADOS
+# SUBINDO SITE PARA O SERVIDOR/ IMPORTAÇÕES DE DADOS 
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# DATABASE_URL para DBD_NEON
+DATABASE_URL = os.environ.get("DBD_NEON") 
 
-if DATABASE_URL:
-    # Importação movida para dentro do bloco IF
-    import dj_database_url
-    DATABASES = {
-        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+
+if DATABASE_URL: 
+    # Importação movida para dentro do bloco IF 
+    
+    # IMPORT E DATABASES
+    import dj_database_url 
+    DATABASES = { 
+        "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600) 
+    } 
+
+else: 
+    DATABASES = { 
+        'default': { 
+            'ENGINE': 'django.db.backends.sqlite3', 
+            'NAME': BASE_DIR / 'db.sqlite3', 
+        } 
     }

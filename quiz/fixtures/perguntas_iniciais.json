@@ -1,0 +1,692 @@
+[
+  {
+    "model": "quiz.pergunta",
+    "pk": 176,
+    "fields": {
+      "texto": "Em serviços de Cloud Computing como a AWS, qual modelo permite que os usuários aluguem máquinas virtuais e gerenciem seus próprios sistemas operacionais e aplicações?",
+      "dificuldade": "F",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 177,
+    "fields": {
+      "texto": "No Microsoft Azure, como são chamadas as localizações geográficas que hospedam um ou mais data centers, fornecendo serviços de nuvem e garantindo redundância?",
+      "dificuldade": "F",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 178,
+    "fields": {
+      "texto": "Qual termo é usado para descrever software malicioso, como vírus, ransomware ou spyware, projetado para danificar ou obter acesso não autorizado a sistemas de computador?",
+      "dificuldade": "F",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 179,
+    "fields": {
+      "texto": "O BGP (Border Gateway Protocol) é um protocolo de roteamento que tem como principal função conectar:",
+      "dificuldade": "F",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 180,
+    "fields": {
+      "texto": "Qual prática de segurança exige que um usuário forneça duas ou mais evidências (como senha e código SMS) para verificar sua identidade antes de acessar um sistema ou recurso?",
+      "dificuldade": "F",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 181,
+    "fields": {
+      "texto": "Em serviços de Cloud Computing, qual é a principal característica que distingue uma função Serverless (como AWS Lambda ou Azure Functions) de uma máquina virtual IaaS tradicional?",
+      "dificuldade": "M",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 182,
+    "fields": {
+      "texto": "No contexto do Border Gateway Protocol (BGP), qual atributo é tipicamente usado para influenciar o tráfego de entrada em um Sistema Autônomo (AS) a partir de um AS vizinho, quando existem múltiplos pontos de entrada?",
+      "dificuldade": "M",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 183,
+    "fields": {
+      "texto": "Qual das seguintes opções melhor descreve um 'Zero-Day Exploit' em Segurança Cibernética?",
+      "dificuldade": "M",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 184,
+    "fields": {
+      "texto": "De acordo com o Modelo de Responsabilidade Compartilhada (Shared Responsibility Model) em Cloud Computing, em um cenário de IaaS (Infrastructure as a Service), qual é a principal responsabilidade do cliente?",
+      "dificuldade": "M",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 185,
+    "fields": {
+      "texto": "Qual é a principal vantagem de uma rede SD-WAN (Software-Defined Wide Area Network) sobre uma WAN tradicional baseada em MPLS, especialmente no que diz respeito à flexibilidade e otimização de custos?",
+      "dificuldade": "M",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 186,
+    "fields": {
+      "texto": "Uma organização precisa estabelecer conectividade privada e segura entre dezenas de VPCs (Virtual Private Clouds) espalhadas por múltiplas contas AWS e regiões diferentes, além de permitir o acesso privado a serviços de terceiros hospedados na AWS sem expor o tráfego à internet pública. Qual é a combinação de serviços AWS mais eficiente e escalável para atender a esses requisitos de forma centralizada e com menor complexidade administrativa?",
+      "dificuldade": "D",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 187,
+    "fields": {
+      "texto": "Em um cenário onde um roteador BGP recebe múltiplos caminhos para o mesmo prefixo de rede de diferentes peers e todos os caminhos possuem o mesmo peso (WEIGHT), mesma Local Preference (LP) e são originados localmente (ou via aggregate), qual atributo é avaliado *imediatamente* após a preferência por caminhos originados localmente para determinar o melhor caminho, e como ele geralmente interage com o Multi-Exit Discriminator (MED)?",
+      "dificuldade": "D",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 188,
+    "fields": {
+      "texto": "Durante a fase de testes de segurança em um pipeline CI/CD moderno, uma equipe de desenvolvimento está buscando identificar vulnerabilidades tanto em tempo de execução quanto no código-fonte, mas com a capacidade de correlacionar os resultados diretamente com o código sem a necessidade de instrumentação manual pesada. Qual combinação de metodologias de teste de segurança seria mais eficaz para atingir esse objetivo, minimizando falsos positivos e fornecendo insights acionáveis rapidamente?",
+      "dificuldade": "D",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 189,
+    "fields": {
+      "texto": "Em um sistema de banco de dados distribuído, o teorema CAP afirma que é impossível para um sistema fornecer simultaneamente Consistência (Consistency), Disponibilidade (Availability) e Tolerância a Particionamento (Partition Tolerance). Se um arquiteto de dados está projetando um sistema onde a resiliência a falhas de rede é uma prioridade máxima e o sistema deve *continuar a responder* às requisições mesmo durante um evento de partição de rede, qual par de propriedades ele *priorizará*, aceitando uma potencial limitação na terceira propriedade?",
+      "dificuldade": "D",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.pergunta",
+    "pk": 190,
+    "fields": {
+      "texto": "Uma empresa está adotando microsserviços e enfrenta desafios como roteamento complexo, observabilidade distribuída, políticas de segurança e gerenciamento de tráfego (ex: circuit breaking, retries) entre seus serviços em um ambiente Kubernetes. Qual tecnologia é mais adequada para resolver esses desafios de forma transparente, desacoplando essas funcionalidades da lógica de negócio de cada serviço?",
+      "dificuldade": "D",
+      "categoria": "Geração IA",
+      "tempo_limite": 30
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 701,
+    "fields": {
+      "pergunta": 176,
+      "texto": "PaaS (Platform as a Service)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 702,
+    "fields": {
+      "pergunta": 176,
+      "texto": "SaaS (Software as a Service)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 703,
+    "fields": {
+      "pergunta": 176,
+      "texto": "IaaS (Infrastructure as a Service)",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 704,
+    "fields": {
+      "pergunta": 176,
+      "texto": "FaaS (Function as a Service)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 705,
+    "fields": {
+      "pergunta": 177,
+      "texto": "Zonas de Disponibilidade",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 706,
+    "fields": {
+      "pergunta": 177,
+      "texto": "Grupos de Recursos",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 707,
+    "fields": {
+      "pergunta": 177,
+      "texto": "Regiões Azure",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 708,
+    "fields": {
+      "pergunta": 177,
+      "texto": "Contas de Armazenamento",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 709,
+    "fields": {
+      "pergunta": 178,
+      "texto": "Firewall",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 710,
+    "fields": {
+      "pergunta": 178,
+      "texto": "Patch",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 711,
+    "fields": {
+      "pergunta": 178,
+      "texto": "Malware",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 712,
+    "fields": {
+      "pergunta": 178,
+      "texto": "Autenticação Multifator",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 713,
+    "fields": {
+      "pergunta": 179,
+      "texto": "Computadores em uma rede local (LAN).",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 714,
+    "fields": {
+      "pergunta": 179,
+      "texto": "Dispositivos IoT em uma casa inteligente.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 715,
+    "fields": {
+      "pergunta": 179,
+      "texto": "Sistemas Autônomos (AS) diferentes na internet.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 716,
+    "fields": {
+      "pergunta": 179,
+      "texto": "Servidores de banco de dados em um cluster.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 717,
+    "fields": {
+      "pergunta": 180,
+      "texto": "Criptografia de Ponta a Ponta",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 718,
+    "fields": {
+      "pergunta": 180,
+      "texto": "Firewall de Próxima Geração",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 719,
+    "fields": {
+      "pergunta": 180,
+      "texto": "Autenticação de Múltiplos Fatores (MFA)",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 720,
+    "fields": {
+      "pergunta": 180,
+      "texto": "Teste de Penetração",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 721,
+    "fields": {
+      "pergunta": 181,
+      "texto": "Serverless requer provisionamento e manutenção manual do sistema operacional subjacente.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 722,
+    "fields": {
+      "pergunta": 181,
+      "texto": "Serverless executa código apenas em resposta a eventos, com escalabilidade automática e faturamento baseado no consumo real, sem gerenciamento de servidores.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 723,
+    "fields": {
+      "pergunta": 181,
+      "texto": "Serverless oferece controle total sobre a infraestrutura física e virtual, incluindo hardware e rede.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 724,
+    "fields": {
+      "pergunta": 181,
+      "texto": "Serverless garante recursos de CPU e memória dedicados e persistentes para cada execução.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 725,
+    "fields": {
+      "pergunta": 182,
+      "texto": "Weight (Peso)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 726,
+    "fields": {
+      "pergunta": 182,
+      "texto": "Local Preference (Preferencia Local)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 727,
+    "fields": {
+      "pergunta": 182,
+      "texto": "Multi-Exit Discriminator (MED)",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 728,
+    "fields": {
+      "pergunta": 182,
+      "texto": "AS Path Length (Comprimento do Caminho AS)",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 729,
+    "fields": {
+      "pergunta": 183,
+      "texto": "Um ataque que explora uma vulnerabilidade de software que já foi corrigida e um patch está disponível publicamente.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 730,
+    "fields": {
+      "pergunta": 183,
+      "texto": "Uma técnica de engenharia social que engana os usuários para revelar suas credenciais de login.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 731,
+    "fields": {
+      "pergunta": 183,
+      "texto": "Uma falha de segurança conhecida e documentada que é amplamente explorada por atacantes oportunistas.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 732,
+    "fields": {
+      "pergunta": 183,
+      "texto": "Uma vulnerabilidade de software recém-descoberta para a qual o fornecedor do software ainda não lançou um patch ou correção.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 733,
+    "fields": {
+      "pergunta": 184,
+      "texto": "Segurança da infraestrutura física, virtualização e redes do provedor de nuvem.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 734,
+    "fields": {
+      "pergunta": 184,
+      "texto": "Segurança e configuração do sistema operacional convidado, aplicações, dados e configuração de rede da VM.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 735,
+    "fields": {
+      "pergunta": 184,
+      "texto": "Manutenção dos servidores físicos e do hipervisor subjacente.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 736,
+    "fields": {
+      "pergunta": 184,
+      "texto": "Gerenciamento completo de todos os aspectos da segurança, desde a camada física até a aplicação.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 737,
+    "fields": {
+      "pergunta": 185,
+      "texto": "Exige o uso exclusivo de links MPLS para garantir alta performance e segurança.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 738,
+    "fields": {
+      "pergunta": 185,
+      "texto": "Permite o gerenciamento centralizado do tráfego e a seleção inteligente de rotas através de múltiplos tipos de transporte (MPLS, internet banda larga, 4G/5G).",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 739,
+    "fields": {
+      "pergunta": 185,
+      "texto": "Requer configuração manual de cada roteador em cada filial para estabelecer políticas de tráfego.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 740,
+    "fields": {
+      "pergunta": 185,
+      "texto": "Elimina completamente a necessidade de qualquer mecanismo de segurança, como VPNs, devido à sua arquitetura distribuída.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 741,
+    "fields": {
+      "pergunta": 186,
+      "texto": "VPC Peering e AWS Direct Connect.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 742,
+    "fields": {
+      "pergunta": 186,
+      "texto": "AWS Transit Gateway e AWS PrivateLink.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 743,
+    "fields": {
+      "pergunta": 186,
+      "texto": "VPN Site-to-Site e AWS Global Accelerator.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 744,
+    "fields": {
+      "pergunta": 186,
+      "texto": "AWS Client VPN e Internet Gateway com NAT Gateway.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 745,
+    "fields": {
+      "pergunta": 187,
+      "texto": "Multi-Exit Discriminator (MED); o menor MED é preferido e sempre tem precedência sobre o AS_PATH, independentemente da origem do AS.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 746,
+    "fields": {
+      "pergunta": 187,
+      "texto": "AS_PATH Length; o caminho com o menor número de ASes no AS_PATH é preferido, e este critério é avaliado antes do MED na maioria das configurações BGP.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 747,
+    "fields": {
+      "pergunta": 187,
+      "texto": "Origin Type (IGP, EGP, Incomplete); IGP é sempre preferido, e o MED só é considerado após o Origin Type e o AS_PATH.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 748,
+    "fields": {
+      "pergunta": 187,
+      "texto": "Multi-Exit Discriminator (MED); o menor MED é preferido, mas este critério é avaliado *apenas após* a comparação do AS_PATH Length e *somente se* os caminhos para o prefixo forem recebidos do *mesmo Autonomous System (AS)* vizinho.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 749,
+    "fields": {
+      "pergunta": 188,
+      "texto": "DAST (Dynamic Application Security Testing) e Verificação de Dependências.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 750,
+    "fields": {
+      "pergunta": 188,
+      "texto": "SAST (Static Application Security Testing) e Testes de Penetração.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 751,
+    "fields": {
+      "pergunta": 188,
+      "texto": "IAST (Interactive Application Security Testing) e SAST (Static Application Security Testing).",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 752,
+    "fields": {
+      "pergunta": 188,
+      "texto": "RASP (Runtime Application Self-Protection) e Fuzzing.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 753,
+    "fields": {
+      "pergunta": 189,
+      "texto": "Consistência e Disponibilidade.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 754,
+    "fields": {
+      "pergunta": 189,
+      "texto": "Consistência e Tolerância a Particionamento.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 755,
+    "fields": {
+      "pergunta": 189,
+      "texto": "Disponibilidade e Consistência.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 756,
+    "fields": {
+      "pergunta": 189,
+      "texto": "Disponibilidade e Tolerância a Particionamento.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 757,
+    "fields": {
+      "pergunta": 190,
+      "texto": "API Gateway.",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 758,
+    "fields": {
+      "pergunta": 190,
+      "texto": "Service Mesh.",
+      "is_correta": true
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 759,
+    "fields": {
+      "pergunta": 190,
+      "texto": "Message Broker (e.g., Kafka).",
+      "is_correta": false
+    }
+  },
+  {
+    "model": "quiz.resposta",
+    "pk": 760,
+    "fields": {
+      "pergunta": 190,
+      "texto": "Orquestrador de Contêineres (e.g., Kubernetes).",
+      "is_correta": false
+    }
+  }
+]

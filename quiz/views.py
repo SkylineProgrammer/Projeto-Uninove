@@ -11,15 +11,15 @@ from rest_framework.response import Response
 import json
 import random
 
+# BLOCO DE IMPORTAÇÃO DO GEMINI/PERFIL
 try:
     from google import genai
     from google.genai.errors import APIError 
-    
     from usuarios.models import Perfil 
 except ImportError:
-    
+    # Garante que as variaveis existam mesmo se as bibliotecas falharem
     genai = None
-    APIError = Exception
+    class APIError(Exception): pass # Define uma classe de erro 
     Perfil = None
 
 
@@ -34,6 +34,7 @@ from django.db import models # Necessário para models.Max
 gemini_client = None
 if settings.GEMINI_API_KEY and genai:
     try:
+        # A API Key do Gemini é carregada de settings (Render)
         gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY) 
     except Exception as e:
         print(f"Erro ao inicializar o cliente Gemini: {e}")
@@ -298,8 +299,10 @@ def gerar_e_salvar_perguntas(request, dificuldade_char):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    # CORREÇÃO CRÍTICA DO PROMPT: Uso de strings 'true'/'false' dentro da f-string.
     prompt = f"""
     Gere 5 perguntas de múltipla escolha sobre Tecnologia da Informação (TI) de dificuldade {dificuldade_nome}.
+    O foco deve ser em **tópicos avançados** ou **específicos** como Cloud Computing (AWS/Azure), Redes BGP, ou Segurança Cibernética, **evitando perguntas sobre hardware básico** ou internet.
     Para cada pergunta, gere exatamente 4 opções de resposta.
     Apenas uma opção deve ser a correta.
     O formato da saída DEVE ser estritamente um array JSON, onde cada objeto é uma pergunta.
@@ -308,10 +311,10 @@ def gerar_e_salvar_perguntas(request, dificuldade_char):
       {{
         "texto": "Pergunta 1...",
         "respostas": [
-          {{"texto": "Resposta A", "correta": false}},
-          {{"texto": "Resposta B", "correta": true}},
-          {{"texto": "Resposta C", "correta": false}},
-          {{"texto": "Resposta D", "correta": false}}
+          {{"texto": "Resposta A", "correta": 'false'}},
+          {{"texto": "Resposta B", "correta": 'true'}},
+          {{"texto": "Resposta C", "correta": 'false'}},
+          {{"texto": "Resposta D", "correta": 'false'}}
         ]
       }},
       ...
@@ -327,7 +330,7 @@ def gerar_e_salvar_perguntas(request, dificuldade_char):
         
         perguntas_json = json.loads(response.text)
         
-        # LOGICA DE SALTAVEMNTO PARA O BANCO DE DADOS 
+        # LOGICA DE SALVAMENTO tratar a string true/false ou o booleano literal
         perguntas_salvas = 0
         for item in perguntas_json:
             pergunta = Pergunta.objects.create(
@@ -337,10 +340,12 @@ def gerar_e_salvar_perguntas(request, dificuldade_char):
             )
             
             for resp_data in item['respostas']:
+                # Converte o valor de correta para booleano True/False do Python para salvar no Django
+                is_correta_bool = str(resp_data['correta']).lower() == 'true'
                 Resposta.objects.create(
                     pergunta=pergunta,
                     texto=resp_data['texto'],
-                    is_correta=resp_data['correta']
+                    is_correta=is_correta_bool
                 )
             perguntas_salvas += 1
             
